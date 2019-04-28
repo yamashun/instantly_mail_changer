@@ -36,7 +36,7 @@ module InstantlyMailChanger
 
       @template_id = template_id
 
-      AutoSellMailer.send_mail(
+      HogeMailer.send_mail(
         send_to,
         body || message_body,
         subject || message_subject,
