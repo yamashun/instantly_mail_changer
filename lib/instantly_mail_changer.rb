@@ -2,13 +2,17 @@ require "instantly_mail_changer/version"
 require "instantly_mail_changer/config"
 
 class InstantlyMailChanger
-  include Config
+  extend Config
 
   class Error < StandardError; end
   # Your code goes here...
 
-  def initialize(instance_for_template)
+  def initialize(instance_for_template = nil)
     @instance_for_template = instance_for_template
+  end
+
+  def send_test
+    self.class.title_column
   end
 
   def send_mail(send_to:, template_id:, custom_headers: {}, wait_second: 1, content_type: nil)
@@ -18,9 +22,10 @@ class InstantlyMailChanger
     @template_id = template_id
 
     HogeMailer.send_mail(
-      send_to,
-      message_body,
-      message_subject,
+      to: send_to,
+      body: message_body,
+      subject: message_subject,
+      from_name: mail_from_name,
       from: mail_from,
       content_type: content_type,
       custom_header: custom_headers,
