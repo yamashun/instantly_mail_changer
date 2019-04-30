@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "instantly_mail_changer"
+require "action_mailer"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

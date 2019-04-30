@@ -1,6 +1,7 @@
-class InstantlyMailChanger
+module InstantlyMailChanger
   module Config
     OPTION_KEYS = [
+      :mailer_name,
       :title_column,
       :body_column,
       :template_model_name,

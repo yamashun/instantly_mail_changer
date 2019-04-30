@@ -91,6 +91,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer
+  activerecord
   bundler (~> 2.0)
   instantly_mail_changer!
   rake (~> 10.0)
