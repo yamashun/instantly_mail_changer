@@ -30,7 +30,7 @@ module InstantlyMailChanger
         from: @mail_from,
         content_type: content_type,
         custom_header: custom_headers,
-      ).deliver_later(wait: wait_second)
+      ).deliver_now
     end
 
     private
