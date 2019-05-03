@@ -16,13 +16,13 @@ module InstantlyMailChanger
       @mail_from = self.class.mail_from
     end
 
-    def send_mail(send_to:, template_id:, custom_headers: {}, wait_second: 1, content_type: nil)
+    def send_mail(send_to:, template_id:, custom_headers: {}, wait_second: nil, content_type: nil)
       # TODO: define error class
       raise Error if send_to.nil? || template_id.nil?
 
       @template_id = template_id
 
-      Object.const_get(@mailer_name).send_mail(
+      deliver_mail = Object.const_get(@mailer_name).send_mail(
         to: send_to,
         body: message_body,
         subject: message_subject,
@@ -30,7 +30,8 @@ module InstantlyMailChanger
         from: @mail_from,
         content_type: content_type,
         custom_header: custom_headers,
-      ).deliver_now
+      )
+      wait_second ? deliver_mail.deliver_later(wait_second: wait_second) : deliver_mail.deliver_now
     end
 
     private
