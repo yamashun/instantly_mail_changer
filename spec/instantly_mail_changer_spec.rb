@@ -56,7 +56,9 @@ RSpec.describe InstantlyMailChanger do
         end
 
         class DummyMessageDelivery
-          def deliver_later(wait: 1)
+          def deliver_later(wait:)
+          end
+          def deliver_now
           end
         end
       end
@@ -82,7 +84,7 @@ RSpec.describe InstantlyMailChanger do
         content_type: nil,
         custom_header: {},
       )
-      
+
       imc.send_mail(send_to: 'aaaa@co.jp', template_id: 1)
     end
   end
