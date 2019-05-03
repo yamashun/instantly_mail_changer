@@ -1,0 +1,10 @@
+class Create<%= @tempalte_table_name_camel %> < ActiveRecord::Migration[5.2]
+  def change
+    create_table :<%= @tempalte_table_name %> do |t|
+      t.text :<%= @title_column %>
+      t.text :<%= @body_column %>
+
+      t.timestamps
+    end
+  end
+end
