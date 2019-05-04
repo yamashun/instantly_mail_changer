@@ -1,6 +1,6 @@
 module InstantlyMailChanger
   module Config
-    OPTION_KEYS = [
+    CONFIG_KEYS = [
       :mailer_name,
       :title_column,
       :body_column,
@@ -9,16 +9,16 @@ module InstantlyMailChanger
       :mail_from,
     ]
 
-    attr_accessor(*OPTION_KEYS)
+    attr_accessor(*CONFIG_KEYS)
 
     def configure
       yield self
     end
 
-    def options
-      options = {}
-      OPTION_KEYS.each{|key| options[key] = send(key)}
-      options
+    def configs
+      configs = {}
+      CONFIG_KEYS.each{|key| configs[key] = send(key)}
+      configs
     end
   end
 end
