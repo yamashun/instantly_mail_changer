@@ -9,11 +9,6 @@ module InstantlyMailChanger
 
     def initialize(instance_for_template = nil)
       @instance_for_template = instance_for_template
-      @mailer_name = self.class.mailer_name
-      @title_column = self.class.title_column
-      @body_column = self.class.body_column
-      @mail_from_name = self.class.mail_from_name
-      @mail_from = self.class.mail_from
     end
 
     def send_mail(send_to:, template_id:, custom_headers: {}, wait_second: nil, content_type: nil)
@@ -22,12 +17,12 @@ module InstantlyMailChanger
 
       @template_id = template_id
 
-      deliver_mail = Object.const_get(@mailer_name).send_mail(
+      deliver_mail = Object.const_get(options[:mailer_name]).send_mail(
         to: send_to,
         body: message_body,
         subject: message_subject,
-        from_name: @mail_from_name,
-        from: @mail_from,
+        from_name: options[:mail_from_name],
+        from: options[:mail_from],
         content_type: content_type,
         custom_header: custom_headers,
       )
@@ -36,16 +31,20 @@ module InstantlyMailChanger
 
     private
 
+    def options
+      @options ||= self.class.options
+    end
+
     def notice_template
-      @notice_template ||= Object.const_get(self.class.template_model_name).find(@template_id)
+      @notice_template ||= Object.const_get(options[:template_model_name]).find(@template_id)
     end
 
     def message_body
-      generate_template(notice_template.send(@body_column.to_sym), @instance_for_template)
+      generate_template(notice_template.send(options[:body_column].to_sym), @instance_for_template)
     end
 
     def message_subject
-      generate_template(notice_template.send(@title_column.to_sym), @instance_for_template)
+      generate_template(notice_template.send(options[:title_column].to_sym), @instance_for_template)
     end
 
     def generate_template(template, obj)
