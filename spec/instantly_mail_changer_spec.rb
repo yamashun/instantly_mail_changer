@@ -31,12 +31,12 @@ RSpec.describe InstantlyMailChanger do
         config.mailer_name = 'FlexibleMailer'
         config.title_column = 'mail_subject'
         config.body_column = 'mail_body'
-        config.template_model_name = 'DummyTemplateModel'
+        config.template_model_name = 'DummyMailTemplateModel'
         config.mail_from_name = 'foo'
         config.mail_from = 'bar@co.jp'
       end
 
-      class DummyTemplateModel
+      class DummyMailTemplateModel
         attr_accessor :id, :mail_subject, :mail_body
 
         def initialize(**args)
@@ -63,10 +63,6 @@ RSpec.describe InstantlyMailChanger do
         end
       end
     end
-
-    # after :each do
-    #   remove_classes(DummyTemplateModel)
-    # end
 
     DummyObj = Struct.new(:title, :name, :url)
 

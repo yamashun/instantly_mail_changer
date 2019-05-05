@@ -1,5 +1,6 @@
 require "instantly_mail_changer/version"
 require "instantly_mail_changer/config"
+require "instantly_mail_changer/deliverable"
 
 module InstantlyMailChanger
   class Error < StandardError; end
