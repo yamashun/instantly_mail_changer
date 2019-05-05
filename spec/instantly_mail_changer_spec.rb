@@ -9,16 +9,16 @@ RSpec.describe InstantlyMailChanger do
         config.mailer_name = 'FlexibleMailer'
         config.title_column = 'mail_subject'
         config.body_column = 'mail_body'
-        config.template_model_name = 'NoticeTemplate'
+        config.template_model_name = 'DummyTemplateModel'
         config.mail_from_name = 'foo'
         config.mail_from = 'bar@co.jp'
       end
 
-      imc = InstantlyMailChanger::DeliverMail.new
+      imc = InstantlyMailChanger::DeliverMail.new({}, nil)
       expect(imc.class.mailer_name).to eq 'FlexibleMailer'
       expect(imc.class.title_column).to eq 'mail_subject'
       expect(imc.class.body_column).to eq 'mail_body'
-      expect(imc.class.template_model_name).to eq 'NoticeTemplate'
+      expect(imc.class.template_model_name).to eq 'DummyTemplateModel'
       expect(imc.class.mail_from_name).to eq 'foo'
       expect(imc.class.mail_from).to eq 'bar@co.jp'
     end
@@ -68,7 +68,7 @@ RSpec.describe InstantlyMailChanger do
 
     it "call send_mail and interporate obj's method return values into template" do
       obj = DummyObj.new('Weekly', 'Weekly Digest', 'https://foo.bar.com')
-      imc = InstantlyMailChanger::DeliverMail.new(obj)
+      imc = InstantlyMailChanger::DeliverMail.new(obj, 1)
 
       allow(FlexibleMailer).to receive(:send_mail).and_return(FlexibleMailer::DummyMessageDelivery.new)
       expect(FlexibleMailer).to receive(:send_mail).with(
@@ -81,7 +81,7 @@ RSpec.describe InstantlyMailChanger do
         custom_header: {},
       )
 
-      imc.send_mail(send_to: 'aaaa@co.jp', template_id: 1)
+      imc.send_mail(send_to: 'aaaa@co.jp')
     end
   end
 end
