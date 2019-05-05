@@ -2,6 +2,8 @@ require "bundler/setup"
 require "instantly_mail_changer"
 require "action_mailer"
 
+require "support/dummy_classes.rb"
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
