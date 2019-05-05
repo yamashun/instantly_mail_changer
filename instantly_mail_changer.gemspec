@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "activerecord"
   spec.add_development_dependency "actionmailer"
   spec.add_development_dependency "railties"
+  spec.add_development_dependency "pry-byebug"
   spec.add_dependency "activerecord"
   spec.add_dependency "actionmailer"
 end
