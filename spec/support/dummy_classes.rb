@@ -13,7 +13,7 @@ class DummyTemplateModel
 end
 
 class DummySendClass
-  include InstantlyMailChanger::Deliverable
+  include DynamicTextGenerator::Generatable
 
   template_model :dummy_template_model
   template_columns :attr1, :attr2

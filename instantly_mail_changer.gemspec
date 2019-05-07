@@ -44,4 +44,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-byebug"
   spec.add_dependency "activerecord"
   spec.add_dependency "actionmailer"
+  spec.add_dependency "dynamic_text_generator"
 end

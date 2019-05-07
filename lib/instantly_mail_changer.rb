@@ -1,6 +1,6 @@
 require "instantly_mail_changer/version"
 require "instantly_mail_changer/config"
-require "instantly_mail_changer/deliverable"
+require "dynamic_text_generator"
 
 module InstantlyMailChanger
   class Error < StandardError; end
@@ -8,7 +8,7 @@ module InstantlyMailChanger
   class DeliverMail
     extend Config
 
-    include InstantlyMailChanger::Deliverable
+    include DynamicTextGenerator::Generatable
 
     def initialize(instance_for_template, template_id)
       self.class.template_model configs[:template_model_name].underscore.to_sym
